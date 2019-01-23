@@ -52,6 +52,8 @@ def main():
         creds = tools.run_flow(flow, store)
     service = build('sheets', 'v4', http=creds.authorize(Http()))
 
+    # Todo: Send mail if authentication failed 
+
     # Get logging data
     values = []
     # Read fail log if exist --> /var/log/doorphone_fail.log
@@ -81,7 +83,7 @@ def main():
     # Separate data using year
     # Check if sheet of year exist --> if not, create new sheet of year
     try:
-        # Todo: Use data to determine which year of sheet to write to
+        # Use data to determine which year of sheet to write to
         first_cell = '{}!A1:A1'.format(today.year)
         service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=first_cell).execute()
     except Exception as e: 
@@ -89,6 +91,7 @@ def main():
         # Add new sheet failed
         if not state:
             _write_fail_log(values, FAIL_LOG)
+            # Todo: Send mail if failed
         sys.exit(11)
 
                 
@@ -105,6 +108,7 @@ def main():
     except Exception as e:
         print('Exception: {}'.format(e))
         _write_fail_log(values, FAIL_LOG)
+        # Todo: Send fail if failed
         sys.exit(11)
     else:
         if os.path.isfile(FAIL_LOG):
