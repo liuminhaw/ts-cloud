@@ -1,6 +1,6 @@
 /**
  * Copy text to clipboard
- * @param {string} text Text to be copied to clipboard
+ * @param {string} text - Text to be copied to clipboard
  */
 function copyTextToClipboard(text) {
     var textArea = document.createElement("textarea");

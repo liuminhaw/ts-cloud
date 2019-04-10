@@ -1,8 +1,10 @@
 // Client side script
+
 /**
- * Makes a server call to generate PDF from questionnaire record and send a
- * link to it in an email.
- * @param {Widget} sendButton Button that triggers the action.
+ * Makes a server call to generate PDF from data records
+ * and open new tab of the PDF for printing
+ * @param {Date} startDate - Filter start date
+ * @param {Date} endDate - Filter end date
  */
 function printData(startDate, endDate) {
     showSnackbar("Preparing to print...");
@@ -27,6 +29,7 @@ function printData(startDate, endDate) {
 
 
 // Server side script
+
 /**
  * Default name for temporary Docs file and actual PDF export output.
  */
@@ -41,6 +44,8 @@ var NA_TEXT = 'N/A';
 
 /**
  * Appends record's field as paragraph to the doc with specific formatting.
+ * @param {Body} body - The active document body section
+ * @param {Record[]} record - Array of records to append to document
  */
 function appendField_(body, record) {
   var paragraph = body.appendParagraph('');
@@ -54,7 +59,10 @@ function appendField_(body, record) {
 
 
 /**
- * Generates PDF file from the questionnaire record and return pdf link url
+ * Generate PDF file from filtered records and return PDF url link
+ * @param {Date} startDate - Filter start date
+ * @param {Date} endDate - Filter end date
+ * @return {String} - URL link of the generated PDf
  */
 function exportDataAsPDF(startDate, endDate) {
 //   if (app.getActiveUserRoles().indexOf(app.roles.Admins) === -1) {
@@ -66,7 +74,7 @@ function exportDataAsPDF(startDate, endDate) {
   var startDateFormat = new Date(startDate);
   var endDateFormat = new Date(endDate);
   
-  // Fileter data
+  // Filter data
   query.filters.orderDate._greaterThanOrEquals = startDateFormat;
   query.filters.orderDate._lessThanOrEquals = endDateFormat;
   query.sorting.orderDate._ascending();

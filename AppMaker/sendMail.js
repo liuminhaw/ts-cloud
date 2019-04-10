@@ -1,11 +1,13 @@
 // Client side script
-var RECIEVER = "derek@ts-consultancy.com";
-var SUBJECT = "請假申請通知";
 
+var RECIEVER = "RECEIVER EMAIL HERE";
+var SUBJECT = "EMAIL SUBJECT HERE";
 
 /**
-* Email notification content
-**/
+ * Email notification content
+ * @param {Record} record - Data record (Structure is defined by certain model)
+ * @return {String} - Email content
+ */
 function setEmailContent(record) {
   var msg = "<!DOCTYPE html>";
   
@@ -26,11 +28,11 @@ function setEmailContent(record) {
 }
 
 /**
-* Sends an email message.
-* @param {string} to - Message recipient
-* @param {string} subject - Message subject
-* @param {string} msg - Body of message (HTML from Text Editor)
-*/
+ * Sends an email message.
+ * @param {string} to - Message recipient
+ * @param {string} subject - Message subject
+ * @param {string} msg - Body of message (HTML from Text Editor)
+ */
 function sendMessage(to, subject, msg){
   google.script.run
    .withFailureHandler(function(error) {
@@ -47,8 +49,9 @@ function sendMessage(to, subject, msg){
 
 
 /**
-* Notification email to admin
-**/
+ * Send notification email to administrators
+ * @param {Record} record - Data record
+ */
 function emailNotify(record) {
   var mailBody = setEmailContent(record);
   
@@ -60,11 +63,12 @@ function emailNotify(record) {
 
 
 // Server side script
+
 /**
  * Sends an email.
- * @param {string} to Email address of a recipient.
- * @param {string} subject Subject of email message.
- * @param {string} body Body of email message.
+ * @param {string} to - Message recipient
+ * @param {string} subject - Message subject
+ * @param {string} body - Message body
  */
 function sendEmailMessage(to, subject, body) {
   var emailObj = {
