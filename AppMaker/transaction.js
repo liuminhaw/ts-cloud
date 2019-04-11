@@ -3,6 +3,10 @@
  * Controlling CloudSQL transaction
  */
 
+ /**
+  * Using server script to control Cloud SQL transaction
+  * @param {Number} orderKey - Key value of a record in database 
+  */
 function submitOrder(orderKey) {
 
   // Sets a rollback point and starts a new transaction.

@@ -106,6 +106,21 @@ Some function codes that may be useful in AppMaker
 
     @param {Number} orderKey - Key value of a record in database
 
+#### appSettings.js
+`getSettingsRecord_` - Get url of the app, and configure default settings if not already set
+
+    getSettingsRecord_()
+
+    @return {Record[]} - Database record
+
+#### dataDetail.js
+`getUrlToProductDetails` - Redirects user to data detail page
+
+    getUrlToProductDetails(requestKey)
+
+    @param {Request} request - Selected record key
+
+
 
 
 
