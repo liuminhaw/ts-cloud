@@ -62,6 +62,11 @@ def main():
             rows = csv.reader(csvfile)
             for row in rows:
                 value = []
+                # Skipped if name of card is "Test"
+                if row[1] == 'Test':
+                    continue
+
+                # Construct data to write to spreadsheet
                 for each_col in row:
                     value.append(each_col)
                 if len(value) > 0:
@@ -72,6 +77,11 @@ def main():
         rows = csv.reader(csvfile)
 
         for row in rows:
+            # Skipped if name of card is "Test"
+            if row[1] == 'Test':
+                continue
+
+            # Construct data to write to spreadsheet
             if '{} {}'.format(STR_MONTH_MAP[today.month], str(today.day)).lower() in row[0].lower() \
               or '{}  {}'.format(STR_MONTH_MAP[today.month], str(today.day)).lower() in row[0].lower():
                 value = [_compose_date_format(row[0][:16])]
